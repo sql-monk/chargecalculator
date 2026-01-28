@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор заряду батареї</title>
+    <title>Розрахунок заряду батареї</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Калькулятор заряду батареї</h1>
-    <label for="batteryCapacity">Ємність батареї (мАг):</label>
-    <input type="number" id="batteryCapacity" placeholder="Введіть ємність" /><br/>
-
-    <label for="currentDraw">Спож��вання струму (мА):</label>
-    <input type="number" id="currentDraw" placeholder="Введіть споживання" /><br/>
-
-    <button id="calculateBtn">Розрахувати</button>
-    <p id="result"></p>
-
-    <script>
-        document.getElementById('calculateBtn').addEventListener('click', function() {
-            var batteryCapacity = document.getElementById('batteryCapacity').value;
-            var currentDraw = document.getElementById('currentDraw').value;
-
-            if (batteryCapacity && currentDraw) {
-                var hours = batteryCapacity / currentDraw;
-                document.getElementById('result').innerText = 'Час роботи: ' + hours.toFixed(2) + ' годин';
-            } else {
-                document.getElementById('result').innerText = 'Будь ласка, введіть усі поля.';
-            }
-        });
-    </script>
+    <div class="container">
+        <h1>Розрахунок заряду батареї</h1>
+        <form id="calculator-form">
+            <label for="battery-type">Тип батареї:</label>
+            <select id="battery-type">
+                <option value="gel">GEL</option>
+                <option value="agm">AGM/WET</option>
+                <option value="lipo">Li-Po/Ion</option>
+                <option value="life">LiFePO4</option>
+            </select>
+            <label for="voltage">Напруга (В):</label>
+            <input type="number" id="voltage" required>
+            <label for="charge">Заряд (%) :</label>
+            <input type="number" id="charge" required>
+            <button type="submit">Розрахувати</button>
+        </form>
+        <div id="result"></div>
+        <div class="battery-indicator">
+            <div class="battery-level" id="battery-level"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
