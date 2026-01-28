@@ -3,87 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор заряду акумулятора</title>
-    <style>
-        body {
-            background-color: #2c2c2c;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 5px;
-            background-color: #3c3c3c;
-        }
-        h1 {
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            text-align: center;
-        }
-    </style>
+    <title>Калькулятор заряду батареї</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Калькулятор заряду акумулятора</h1>
-        <label for="battery-type">Тип акумулятора:</label>
-        <select id="battery-type">
-            <option value="gel">GEL</option>
-            <option value="agm">AGM/WET</option>
-            <option value="li-po">Li-Po/Ion</option>
-            <option value="life-po4">LiFePO4</option>
-        </select>
-        <label for="voltage">Напруга (В):</label>
-        <input type="number" id="voltage" placeholder="Введіть напругу">
-        <label for="charge">Заряд (Ач):</label>
-        <input type="number" id="charge" placeholder="Введіть заряд">
-        <button id="calculate">Розрахувати</button>
-        <div class="result" id="result"></div>
-    </div>
+    <h1>Калькулятор заряду батареї</h1>
+    <label for="batteryCapacity">Ємність батареї (мАг):</label>
+    <input type="number" id="batteryCapacity" placeholder="Введіть ємність" /><br/>
+
+    <label for="currentDraw">Спож��вання струму (мА):</label>
+    <input type="number" id="currentDraw" placeholder="Введіть споживання" /><br/>
+
+    <button id="calculateBtn">Розрахувати</button>
+    <p id="result"></p>
+
     <script>
-        document.getElementById('calculate').addEventListener('click', function() {
-            const batteryType = document.getElementById('battery-type').value;
-            const voltage = parseFloat(document.getElementById('voltage').value);
-            const charge = parseFloat(document.getElementById('charge').value);
-            let result = '';
-            if(batteryType === 'gel') {
-                result = `Заряд для GEL акумулятора: ${charge * 1.2} Ач при напрузі ${voltage} В`;
-            } else if(batteryType === 'agm') {
-                result = `Заряд для AGM акумулятора: ${charge * 1.15} Ач при напрузі ${voltage} В`;
-            } else if(batteryType === 'li-po') {
-                result = `Заряд для Li-Po акумулятора: ${charge * 1.3} Ач при напрузі ${voltage} В`;
-            } else if(batteryType === 'life-po4') {
-                result = `Заряд для LiFePO4 акумулятора: ${charge * 1.1} Ач при напрузі ${voltage} В`;
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            var batteryCapacity = document.getElementById('batteryCapacity').value;
+            var currentDraw = document.getElementById('currentDraw').value;
+
+            if (batteryCapacity && currentDraw) {
+                var hours = batteryCapacity / currentDraw;
+                document.getElementById('result').innerText = 'Час роботи: ' + hours.toFixed(2) + ' годин';
+            } else {
+                document.getElementById('result').innerText = 'Будь ласка, введіть усі поля.';
             }
-            document.getElementById('result').innerText = result;
         });
     </script>
 </body>
