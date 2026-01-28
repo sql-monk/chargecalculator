@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Battery Charge Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type='number'] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Battery Charge Calculator</h1>
+    <label for='capacity'>Battery Capacity (Ah):</label>
+    <input type='number' id='capacity' />
+    <br />
+    <label for='current'>Current (A):</label>
+    <input type='number' id='current' />
+    <br />
+    <label for='time'>Time (h):</label>
+    <input type='number' id='time' />
+    <br />
+    <button onclick='calculateCharge()'>Calculate</button>
+    <h2 id='result'></h2>
+    <script>
+        function calculateCharge() {
+            var capacity = document.getElementById('capacity').value;
+            var current = document.getElementById('current').value;
+            var time = document.getElementById('time').value;
+            var charge = (current * time) / capacity * 100;
+            document.getElementById('result').innerText = 'Charge level: ' + charge.toFixed(2) + '%';
+        }
+    </script>
+</body>
+</html>
